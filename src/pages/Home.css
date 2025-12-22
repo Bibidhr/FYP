@@ -1,0 +1,259 @@
+/* ===============================
+   HOME WRAPPER
+================================ */
+
+.home {
+  min-height: 100vh;
+  background: #faf7f2;
+}
+
+/* ===============================
+   HERO SECTION
+================================ */
+.hero {
+  padding: 7rem 0;
+  background: #faf7f2;
+}
+
+.hero-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 3rem;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+/* ===============================
+   HERO CONTENT
+================================ */
+.hero-content {
+  animation: fadeInUp 0.9s ease-out;
+}
+
+.hero-tag {
+  display: inline-block;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 5vw, 3.8rem);
+  font-weight: 400;
+  color: var(--dark-color);
+  line-height: 1.15;
+  margin-bottom: 1.8rem;
+  letter-spacing: -1px;
+}
+
+.hero-description {
+  font-size: 1.05rem;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 2.8rem;
+  max-width: 480px;
+}
+
+/* CTA */
+.hero-cta {
+  display: inline-block;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.9rem 2.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 12px 30px rgba(255, 107, 107, 0.35);
+}
+
+.hero-cta:hover {
+  background: #ff5252;
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(255, 107, 107, 0.45);
+}
+
+/* ===============================
+   HERO IMAGE CARD
+================================ */
+.hero-image {
+  animation: fadeInRight 0.9s ease-out;
+}
+
+.hostel-card {
+  background: white;
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.4s ease;
+}
+
+.hostel-card:hover {
+  transform: translateY(-12px);
+}
+
+.hostel-image {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Floating label (MEWS style) */
+.hostel-label {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--dark-color);
+  box-shadow: var(--shadow);
+}
+
+/* ===============================
+   FEATURES SECTION
+================================ */
+.features {
+  padding: 7rem 0;
+  background: white;
+}
+
+.features-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.features-title {
+  font-size: clamp(2.2rem, 4vw, 2.8rem);
+  font-weight: 400;
+  color: var(--dark-color);
+  text-align: center;
+  margin-bottom: 4rem;
+  letter-spacing: -0.5px;
+}
+
+/* Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+/* Cards */
+.feature-card {
+  padding: 2.5rem;
+  background: #fafafa;
+  border-radius: 24px;
+  transition: all 0.35s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  background: white;
+}
+
+.feature-icon {
+  font-size: 2.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dark-color);
+  margin-bottom: 0.6rem;
+}
+
+.feature-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.footer {
+  background: var(--dark-color);
+  color: white;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* ===============================
+   ANIMATIONS
+================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .hostel-image {
+    height: 420px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 5rem 0;
+  }
+
+  .hero-container,
+  .features-container {
+    padding: 0 1.5rem;
+  }
+
+  .hero-title {
+    font-size: 2.4rem;
+  }
+
+  .hero-description {
+    max-width: 100%;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}

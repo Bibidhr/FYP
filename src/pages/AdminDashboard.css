@@ -1,0 +1,329 @@
+/* ============================
+   ADMIN DASHBOARD WRAPPER
+============================= */
+.admin-page {
+    min-height: 100vh;
+    background: var(--bg-color);
+}
+
+.dashboard-container {
+    padding: 2.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* ============================
+   HEADER SECTION
+============================= */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-header h1 {
+    color: var(--dark-color);
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.welcome-text {
+    color: #64748b;
+    font-size: 1.05rem;
+    margin-top: 0.25rem;
+}
+
+.logout-btn {
+    background-color: white;
+    color: var(--error-color);
+    border: 1px solid #fee2e2;
+    padding: 0.7rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow);
+}
+
+.logout-btn:hover {
+    background-color: var(--error-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ============================
+   STATS GRID
+============================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+    padding: 0.8rem;
+    border-radius: 14px;
+    background: #f1f5f9;
+}
+
+.students-icon {
+    background: #eff6ff;
+    color: var(--primary-color);
+}
+
+.wardens-icon {
+    background: #f0fdf4;
+    color: var(--success-color);
+}
+
+.rooms-icon {
+    background: #fdf2f8;
+    color: #db2777;
+}
+
+.alerts-icon {
+    background: #fffbeb;
+    color: var(--accent-color);
+}
+
+.stat-info h3 {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    letter-spacing: 0.5px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--dark-color);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+}
+
+.stat-change {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.stat-change.positive {
+    color: var(--success-color);
+}
+
+.stat-change.negative {
+    color: var(--error-color);
+}
+
+.stat-change.alert {
+    color: var(--accent-color);
+}
+
+/* ============================
+   MAIN CONTENT GRID
+============================= */
+.dashboard-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2.5rem;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    color: var(--dark-color);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+/* Actions */
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.action-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.action-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.action-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+.action-card p {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.action-arrow {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    transition: all 0.3s ease;
+}
+
+.action-card:hover .action-arrow {
+    color: var(--primary-color);
+    transform: translateX(4px);
+}
+
+/* Activity Feed */
+.activity-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    height: 100%;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.activity-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.activity-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    margin-top: 6px;
+    flex-shrink: 0;
+}
+
+.activity-item.info .activity-dot {
+    background: var(--primary-color);
+}
+
+.activity-item.alert .activity-dot {
+    background: var(--error-color);
+}
+
+.activity-item.success .activity-dot {
+    background: var(--success-color);
+}
+
+.activity-text {
+    font-size: 0.95rem;
+    color: var(--dark-color);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+}
+
+.activity-time {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.view-all-btn {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0.8rem;
+    background: #f8fafc;
+    border: none;
+    border-radius: 12px;
+    color: var(--primary-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.view-all-btn:hover {
+    background: #f1f5f9;
+}
+
+/* ============================
+   RESPONSIVE
+============================= */
+@media (max-width: 1024px) {
+    .dashboard-content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .dashboard-container {
+        padding: 1.5rem;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .logout-btn {
+        width: 100%;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

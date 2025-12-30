@@ -49,7 +49,8 @@ const Register = () => {
     );
 
     if (result.success) {
-      navigate('/dashboard');
+      // Navigate to login instead of dashboard
+      navigate('/login');
     } else {
       setError(result.message);
     }
@@ -104,7 +105,8 @@ const Register = () => {
                 onChange={handleChange}
                 required
               >
-              
+
+                <option value="student">Student</option>
                 <option value="warden">Warden</option>
                 <option value="admin">Administrator</option>
               </select>

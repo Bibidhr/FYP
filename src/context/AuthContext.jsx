@@ -33,13 +33,36 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async (name, email, password, role) => {
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password, role }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        return { success: false, message: data.message };
+      }
+
+      // We don't automatically login or set user here per requirements
+      // Just return success so the component can redirect to login
+
+      return { success: true, user: data };
+    } catch (error) {
+      return { success: false, message: "Server error" };
+    }
+  };
+
   const logout = () => {
     setUser(null);
     localStorage.removeItem("userInfo");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, register }}>
       {children}
     </AuthContext.Provider>
   );

@@ -2,26 +2,32 @@
    HOME WRAPPER
 ================================ */
 
+/* ===============================
+   HOME WRAPPER
+================================ */
+
 .home {
   min-height: 100vh;
-  background: #faf7f2;
+  background: white;
 }
 
 /* ===============================
    HERO SECTION
 ================================ */
 .hero {
-  padding: 7rem 0;
-  background: #faf7f2;
+  padding: 8rem 0;
+  background: radial-gradient(circle at top right, #eff6ff, #ffffff 50%);
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-container {
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 3rem;
+  padding: 0 2rem;
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 5rem;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
   align-items: center;
 }
 
@@ -29,78 +35,89 @@
    HERO CONTENT
 ================================ */
 .hero-content {
-  animation: fadeInUp 0.9s ease-out;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-tag {
   display: inline-block;
   color: var(--primary-color);
-  font-weight: 600;
-  font-size: 0.85rem;
+  font-weight: 700;
+  font-size: 0.875rem;
   margin-bottom: 1.5rem;
-  letter-spacing: 1.2px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
+  background: rgba(37, 99, 235, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
 }
 
 .hero-title {
-  font-size: clamp(2.8rem, 5vw, 3.8rem);
-  font-weight: 400;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 800;
   color: var(--dark-color);
-  line-height: 1.15;
-  margin-bottom: 1.8rem;
-  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: -1.5px;
+  background: linear-gradient(to right, var(--dark-color), var(--primary-color));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .hero-description {
-  font-size: 1.05rem;
-  color: #555;
+  font-size: 1.125rem;
+  color: #64748b;
   line-height: 1.8;
-  margin-bottom: 2.8rem;
-  max-width: 480px;
+  margin-bottom: 3rem;
+  max-width: 520px;
 }
 
 /* CTA */
 .hero-cta {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: var(--primary-color);
   color: white;
-  padding: 0.9rem 2.4rem;
-  border-radius: 999px;
+  padding: 1rem 2.8rem;
+  border-radius: 99px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.05rem;
   transition: all 0.3s ease;
-  box-shadow: 0 12px 30px rgba(255, 107, 107, 0.35);
+  box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
 }
 
 .hero-cta:hover {
-  background: #ff5252;
   transform: translateY(-3px);
-  box-shadow: 0 18px 40px rgba(255, 107, 107, 0.45);
+  box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.5);
 }
 
 /* ===============================
    HERO IMAGE CARD
 ================================ */
 .hero-image {
-  animation: fadeInRight 0.9s ease-out;
+  animation: fadeInRight 1s cubic-bezier(0.16, 1, 0.3, 1);
+  perspective: 1000px;
 }
 
 .hostel-card {
   background: white;
-  border-radius: 36px;
+  border-radius: 32px;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
+  transform: rotateY(-5deg) rotateX(2deg);
+  border: 4px solid white;
 }
 
 .hostel-card:hover {
-  transform: translateY(-12px);
+  transform: rotateY(0) rotateX(0) translateY(-10px);
 }
 
 .hostel-image {
   width: 100%;
-  height: 480px;
+  height: 550px;
   object-fit: cover;
   display: block;
 }
@@ -108,59 +125,61 @@
 /* Floating label (MEWS style) */
 .hostel-label {
   position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  background: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 999px;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.8rem 1.5rem;
+  border-radius: 16px;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--dark-color);
   box-shadow: var(--shadow);
+  backdrop-filter: blur(8px);
 }
 
 /* ===============================
    FEATURES SECTION
 ================================ */
 .features {
-  padding: 7rem 0;
-  background: white;
+  padding: 8rem 0;
+  background: #f8fafc;
 }
 
 .features-container {
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 3rem;
+  padding: 0 2rem;
 }
 
 .features-title {
-  font-size: clamp(2.2rem, 4vw, 2.8rem);
-  font-weight: 400;
+  font-size: clamp(2.5rem, 4vw, 3rem);
+  font-weight: 700;
   color: var(--dark-color);
   text-align: center;
-  margin-bottom: 4rem;
-  letter-spacing: -0.5px;
+  margin-bottom: 5rem;
+  letter-spacing: -1px;
 }
 
 /* Grid */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
 }
 
 /* Cards */
 .feature-card {
-  padding: 2.5rem;
-  background: #fafafa;
+  padding: 3rem;
+  background: white;
   border-radius: 24px;
-  transition: all 0.35s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .feature-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
-  background: white;
+  border-color: transparent;
 }
 
 .feature-icon {
@@ -200,6 +219,7 @@
     opacity: 0;
     transform: translateY(40px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -211,6 +231,7 @@
     opacity: 0;
     transform: translateX(40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);

@@ -1,37 +1,49 @@
 /* ===============================
    HEADER
 ================================ */
+/* ===============================
+   HEADER
+================================ */
 .header {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.85);
   position: sticky;
   top: 0;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
 }
 
 .header-container {
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 1.5rem 3rem;
+  padding: 1.25rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 /* Logo */
+.logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .logo-text {
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: -0.6px;
-  color: var(--dark-color);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  letter-spacing: -0.5px;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Navigation */
 .nav {
   display: flex;
   align-items: center;
-  gap: 2.75rem;
+  gap: 2rem;
 }
 
 .nav-link {
@@ -39,50 +51,54 @@
   color: var(--dark-color);
   font-weight: 500;
   font-size: 0.95rem;
-  transition: color 0.25s ease;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
 .nav-link:hover {
   color: var(--primary-color);
 }
 
+/* Active indicator could be added here later */
+
 /* ===============================
    BUTTONS
 ================================ */
 .btn-primary {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), #3b82f6);
   color: white;
-  padding: 0.7rem 1.6rem;
-  border-radius: 999px;
+  padding: 0.75rem 1.75rem;
+  border-radius: 99px;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
 }
 
 .btn-primary:hover {
-  background: #ff5252;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+  filter: brightness(110%);
 }
 
 .btn-secondary {
   background: transparent;
   color: var(--dark-color);
-  padding: 0.65rem 1.4rem;
-  border-radius: 999px;
+  padding: 0.7rem 1.5rem;
+  border-radius: 99px;
   font-weight: 600;
   font-size: 0.95rem;
-  border: 2px solid var(--dark-color);
+  border: 1px solid #e2e8f0;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 .btn-secondary:hover {
-  background: var(--dark-color);
-  color: white;
+  border-color: var(--dark-color);
+  background: #f8fafc;
 }
 
 /* ===============================

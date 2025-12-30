@@ -1,31 +1,36 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import Header from '../components/Header';
 import './Auth.css';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const [status, setStatus] = useState({ type: '', message: '' });
   const [loading, setLoading] = useState(false);
-  const [resetUrl, setResetUrl] = useState('');
-
-  const { forgotPassword } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setMessage('');
     setLoading(true);
+    setStatus({ type: '', message: '' });
 
-    const result = await forgotPassword(email);
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/forgot-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
 
-    if (result.success) {
-      setMessage(result.message);
-      setResetUrl(result.resetUrl);
-    } else {
-      setError(result.message);
+      const data = await res.json();
+
+      if (res.ok) {
+        setStatus({ type: 'success', message: 'Email sent! Check your inbox.' });
+      } else {
+        setStatus({ type: 'error', message: data.message || 'Something went wrong' });
+      }
+    } catch (error) {
+      setStatus({ type: 'error', message: 'Server error. Please try again later.' });
     }
 
     setLoading(false);
@@ -34,24 +39,14 @@ const ForgotPassword = () => {
   return (
     <div className="auth-page">
       <Header />
-
       <div className="auth-container">
         <div className="auth-card">
           <h1 className="auth-title">Forgot Password</h1>
-          <p className="auth-subtitle">Enter your email to reset your password</p>
+          <p className="auth-subtitle">Enter your email to reset password</p>
 
-          {error && <div className="error-message">{error}</div>}
-          {message && (
-            <div className="success-message">
-              {message}
-              {resetUrl && (
-                <div style={{ marginTop: '1rem', fontSize: '0.9rem' }}>
-                  <p>Reset link (development only):</p>
-                  <a href={resetUrl} style={{ color: 'var(--primary-color)', wordBreak: 'break-all' }}>
-                    {resetUrl}
-                  </a>
-                </div>
-              )}
+          {status.message && (
+            <div className={`error-message ${status.type === 'success' ? 'success' : ''}`} style={{ backgroundColor: status.type === 'success' ? '#dbfabb' : '#ffebee', color: status.type === 'success' ? '#4caf50' : '#f44336' }}>
+              {status.message}
             </div>
           )}
 
@@ -61,7 +56,6 @@ const ForgotPassword = () => {
               <input
                 type="email"
                 id="email"
-                name="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -69,17 +63,13 @@ const ForgotPassword = () => {
               />
             </div>
 
-            <button
-              type="submit"
-              className="submit-btn"
-              disabled={loading}
-            >
+            <button type="submit" className="submit-btn" disabled={loading}>
               {loading ? 'Sending...' : 'Send Reset Link'}
             </button>
           </form>
 
           <p className="auth-switch">
-            Remember your password? <Link to="/login">Login here</Link>
+            Remembered? <Link to="/login">Login here</Link>
           </p>
         </div>
       </div>

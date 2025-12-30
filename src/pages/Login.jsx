@@ -23,28 +23,28 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setError('');
-  setLoading(true);
+    e.preventDefault();
+    setError('');
+    setLoading(true);
 
-  const result = await login(formData.email, formData.password);
+    const result = await login(formData.email, formData.password);
 
-  if (result.success) {
-    const role = result.user.role;
+    if (result.success) {
+      const role = result.user.role;
 
-    if (role === 'admin') {
-      navigate('/AdminDashboard');
-    } else if (role === 'warden') {
-      navigate('/warden/dashboard');
+      if (role === 'admin') {
+        navigate('/admin');
+      } else if (role === 'warden') {
+        navigate('/warden');
+      } else {
+        navigate('/student');
+      }
     } else {
-      navigate('/student/dashboard');
+      setError(result.message);
     }
-  } else {
-    setError(result.message);
-  }
 
-  setLoading(false);
-};
+    setLoading(false);
+  };
 
   return (
     <div className="auth-page">

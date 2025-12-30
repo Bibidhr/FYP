@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import User from '../models/User.js';
 import { protect } from '../middleware/auth.js';
+import sendEmail from '../utils/sendEmail.js';
 
 const router = express.Router();
 
@@ -122,14 +123,30 @@ router.post('/forgot-password', async (req, res) => {
 
     await user.save();
 
-    // In production, send email with reset link
-    // For now, we'll return the token
+    await user.save();
+
+    // Reset URL
     const resetUrl = `http://localhost:5173/reset-password/${resetToken}`;
 
-    res.json({
-      message: 'Password reset email sent',
-      resetUrl // In production, don't send this, send via email
-    });
+    const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please click on the link below to reset your password:\n\n${resetUrl}`;
+
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: 'Password Reset Token',
+        message
+      });
+
+      res.status(200).json({ success: true, data: 'Email sent' });
+    } catch (error) {
+      console.error(error);
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+
+      await user.save();
+
+      return res.status(500).json({ message: 'Email could not be sent' });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

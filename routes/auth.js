@@ -89,6 +89,7 @@ router.post("/login", async (req, res) => {
       name: user.name,
       email: user.email,
       role: user.role, // warden | student
+      kycStatus: user.kycStatus,
       token: generateToken(user._id),
     });
   } catch (error) {

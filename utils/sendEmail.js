@@ -48,12 +48,7 @@ const sendEmail = async (options) => {
         console.log('Message sent: %s', info.messageId);
     } catch (error) {
         console.error('❌ Email send failed:', error.message);
-        console.log('⚠️  FALLBACK: Logging email to console due to send failure');
-        console.log('====================================================');
-        console.log(`To:      ${options.email}`);
-        console.log(`Subject: ${options.subject}`);
-        console.log(`Message: \n${options.message}`);
-        console.log('====================================================');
+        throw new Error('Email could not be sent');
     }
 };
 

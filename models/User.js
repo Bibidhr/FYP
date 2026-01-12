@@ -24,6 +24,22 @@ const userSchema = new mongoose.Schema({
     enum: ['student', 'admin', 'warden'],
     default: 'student'
   },
+  kycStatus: {
+    type: String,
+    enum: ['pending_submission', 'pending_approval', 'approved', 'rejected'],
+    default: 'pending_submission'
+  },
+  kycData: {
+    phone: String,
+    address: String,
+    guardianName: String,
+    guardianPhone: String,
+    dob: Date,
+    gender: String,
+    nationality: String,
+    idProofType: String, // e.g., 'Citizenship', 'Passport'
+    idProofNumber: String
+  },
   resetPasswordToken: String,
   resetPasswordExpire: Date,
   createdAt: {
@@ -33,7 +49,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Hash password before saving
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     next();
   }
@@ -42,7 +58,7 @@ userSchema.pre('save', async function(next) {
 });
 
 // Compare password method
-userSchema.methods.comparePassword = async function(enteredPassword) {
+userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 

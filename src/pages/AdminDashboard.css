@@ -3,7 +3,19 @@
 ============================= */
 .admin-page {
     min-height: 100vh;
-    background: var(--bg-color);
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+    position: relative;
+}
+
+.admin-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.1), transparent 70%);
+    pointer-events: none;
 }
 
 .dashboard-container {
@@ -38,26 +50,6 @@
     margin-top: 0.25rem;
 }
 
-.logout-btn {
-    background-color: white;
-    color: var(--error-color);
-    border: 1px solid #fee2e2;
-    padding: 0.7rem 1.5rem;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-    box-shadow: var(--shadow);
-}
-
-.logout-btn:hover {
-    background-color: var(--error-color);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
 /* ============================
    STATS GRID
 ============================= */
@@ -76,13 +68,31 @@
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    transition: transform 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-card:hover::before {
+    opacity: 1;
 }
 
 .stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px -8px rgba(124, 58, 237, 0.2);
 }
 
 .stat-icon {
@@ -90,26 +100,31 @@
     padding: 0.8rem;
     border-radius: 14px;
     background: #f1f5f9;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+    transform: scale(1.1);
 }
 
 .students-icon {
-    background: #eff6ff;
+    background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
     color: var(--primary-color);
 }
 
 .wardens-icon {
-    background: #f0fdf4;
-    color: var(--success-color);
+    background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+    color: var(--secondary-color);
 }
 
 .rooms-icon {
-    background: #fdf2f8;
-    color: #db2777;
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #f59e0b;
 }
 
 .alerts-icon {
-    background: #fffbeb;
-    color: var(--accent-color);
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: var(--error-color);
 }
 
 .stat-info h3 {
@@ -182,10 +197,29 @@
     overflow: hidden;
 }
 
+.action-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg,
+            transparent,
+            rgba(124, 58, 237, 0.05),
+            transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+}
+
+.action-card:hover::before {
+    left: 100%;
+}
+
 .action-card:hover {
     border-color: var(--primary-color);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 40px -12px rgba(124, 58, 237, 0.25);
 }
 
 .action-icon {
@@ -326,4 +360,137 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ============================
+   DARK MODE STYLES
+============================= */
+.dark-mode .admin-page {
+    background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+}
+
+.dark-mode .admin-page::before {
+    background: radial-gradient(circle at top right, rgba(147, 51, 234, 0.15), transparent 70%);
+}
+
+.dark-mode .dashboard-header {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .dashboard-header h1 {
+    color: var(--dark-color);
+}
+
+.dark-mode .welcome-text {
+    color: #94a3b8;
+}
+
+.dark-mode .stat-card {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .stat-card:hover {
+    box-shadow: 0 12px 24px -8px rgba(147, 51, 234, 0.4);
+}
+
+.dark-mode .stat-icon {
+    background: #0f172a;
+}
+
+.dark-mode .students-icon {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(147, 51, 234, 0.3));
+    color: #c084fc;
+}
+
+.dark-mode .wardens-icon {
+    background: linear-gradient(135deg, rgba(244, 114, 182, 0.2), rgba(244, 114, 182, 0.3));
+    color: #f9a8d4;
+}
+
+.dark-mode .rooms-icon {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.3));
+    color: #fcd34d;
+}
+
+.dark-mode .alerts-icon {
+    background: linear-gradient(135deg, rgba(248, 113, 113, 0.2), rgba(248, 113, 113, 0.3));
+    color: #fca5a5;
+}
+
+.dark-mode .stat-info h3 {
+    color: #94a3b8;
+}
+
+.dark-mode .stat-number {
+    color: var(--dark-color);
+}
+
+.dark-mode .stat-change {
+    color: #94a3b8;
+}
+
+.dark-mode .section-title {
+    color: var(--dark-color);
+}
+
+.dark-mode .action-card {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .action-card::before {
+    background: linear-gradient(45deg,
+            transparent,
+            rgba(147, 51, 234, 0.1),
+            transparent);
+}
+
+.dark-mode .action-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 20px 40px -12px rgba(147, 51, 234, 0.4);
+}
+
+.dark-mode .action-card h3 {
+    color: var(--dark-color);
+}
+
+.dark-mode .action-card p {
+    color: #94a3b8;
+}
+
+.dark-mode .action-arrow {
+    color: #475569;
+}
+
+.dark-mode .action-card:hover .action-arrow {
+    color: var(--primary-color);
+}
+
+.dark-mode .activity-card {
+    background: #1e293b;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .activity-dot {
+    background: #475569;
+}
+
+.dark-mode .activity-text {
+    color: var(--dark-color);
+}
+
+.dark-mode .activity-time {
+    color: #64748b;
+}
+
+.dark-mode .view-all-btn {
+    background: #0f172a;
+    color: var(--primary-color);
+}
+
+.dark-mode .view-all-btn:hover {
+    background: #1e1b4b;
 }

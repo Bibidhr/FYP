@@ -213,5 +213,98 @@
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
+}
+
+/* ===============================
+   DARK MODE STYLES
+================================ */
+.dark-mode .dashboard {
+  background: #0f172a;
+}
+
+.dark-mode .welcome-section {
+  background: #1e293b;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .welcome-section h1 {
+  color: var(--dark-color);
+}
+
+.dark-mode .user-role {
+  color: #94a3b8;
+}
+
+.dark-mode .stat-card {
+  background: #1e293b;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .stat-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .stat-info h3 {
+  color: #94a3b8;
+}
+
+.dark-mode .stat-value {
+  color: var(--dark-color);
+}
+
+.dark-mode .content-card {
+  background: #1e293b;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .content-card h2 {
+  color: var(--dark-color);
+}
+
+.dark-mode .activity-item {
+  background: #0f172a;
+}
+
+.dark-mode .activity-item:hover {
+  background: #1e1b4b;
+}
+
+.dark-mode .activity-title {
+  color: var(--dark-color);
+}
+
+.dark-mode .activity-time {
+  color: #64748b;
+}
+
+.dark-mode .action-btn {
+  background: #0f172a;
+  color: var(--dark-color);
+}
+
+.dark-mode .action-btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.dark-mode .info-card {
+  background: #1e293b;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .info-card h3 {
+  color: var(--dark-color);
+}
+
+.dark-mode .info-row {
+  background: #0f172a;
+}
+
+.dark-mode .info-label {
+  color: #94a3b8;
+}
+
+.dark-mode .info-value {
+  color: var(--dark-color);
 }

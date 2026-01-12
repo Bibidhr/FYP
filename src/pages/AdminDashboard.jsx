@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
@@ -6,18 +7,62 @@ import "./AdminDashboard.css";
 const AdminDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { token } = useAuth();
+
+  const [stats, setStats] = useState({
+    students: 0,
+    wardens: 0,
+    rooms: 50,
+    issues: 0
+  });
+
+  const [activities, setActivities] = useState([]);
 
   const handleLogout = () => {
     logout();
     navigate("/login");
   };
 
-  const activityLog = [
-    { id: 1, text: "New student registration request: Sarah J.", time: "2 mins ago", type: "info" },
-    { id: 2, text: "Room 102 reported maintenance issue", time: "1 hour ago", type: "alert" },
-    { id: 3, text: "Warden Mike updated Block A status", time: "3 hours ago", type: "success" },
-    { id: 4, text: "Monthly fee generation completed", time: "Yesterday", type: "info" },
-  ];
+  // Fetch stats
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/stats', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await response.json();
+        setStats(data);
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      }
+    };
+
+    fetchStats();
+  }, [token]);
+
+  // Fetch activities
+  useEffect(() => {
+    const fetchActivities = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/stats/activities', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await response.json();
+        setActivities(data);
+      } catch (error) {
+        console.error('Error fetching activities:', error);
+      }
+    };
+
+    fetchActivities();
+    // Refresh every 30 seconds
+    const interval = setInterval(fetchActivities, 30000);
+    return () => clearInterval(interval);
+  }, [token]);
 
   return (
     <div className="admin-page">
@@ -30,9 +75,6 @@ const AdminDashboard = () => {
             <h1>Admin Dashboard</h1>
             <p className="welcome-text">Welcome back, {user?.name || "Admin"}</p>
           </div>
-          <button className="logout-btn" onClick={handleLogout}>
-            Logout
-          </button>
         </div>
 
         {/* OVERVIEW STATS */}
@@ -41,7 +83,7 @@ const AdminDashboard = () => {
             <div className="stat-icon students-icon">👥</div>
             <div className="stat-info">
               <h3>Total Students</h3>
-              <p className="stat-number">120</p>
+              <p className="stat-number">{stats.students}</p>
               <span className="stat-change positive">+5% this month</span>
             </div>
           </div>
@@ -50,8 +92,8 @@ const AdminDashboard = () => {
             <div className="stat-icon wardens-icon">🛡️</div>
             <div className="stat-info">
               <h3>Total Wardens</h3>
-              <p className="stat-number">8</p>
-              <span className="stat-change">Active in 4 Blocks</span>
+              <p className="stat-number">{stats.wardens}</p>
+              <span className="stat-change">Active in {Math.ceil(stats.wardens / 2)} Blocks</span>
             </div>
           </div>
 
@@ -59,8 +101,8 @@ const AdminDashboard = () => {
             <div className="stat-icon rooms-icon">🛏️</div>
             <div className="stat-info">
               <h3>Available Rooms</h3>
-              <p className="stat-number">35</p>
-              <span className="stat-change negative">Low availability</span>
+              <p className="stat-number">{stats.rooms}</p>
+              <span className="stat-change negative">Good availability</span>
             </div>
           </div>
 
@@ -68,8 +110,10 @@ const AdminDashboard = () => {
             <div className="stat-icon alerts-icon">⚠️</div>
             <div className="stat-info">
               <h3>Pending Issues</h3>
-              <p className="stat-number">3</p>
-              <span className="stat-change alert">Requires attention</span>
+              <p className="stat-number">{stats.issues}</p>
+              <span className="stat-change alert">
+                {stats.issues === 0 ? 'All clear!' : 'Requires attention'}
+              </span>
             </div>
           </div>
         </div>
@@ -86,25 +130,18 @@ const AdminDashboard = () => {
                 <div className="action-arrow">→</div>
               </div>
 
-              <div className="action-card" onClick={() => navigate('/admin/wardens')}>
+              <div className="action-card" style={{ opacity: 0.5, cursor: 'not-allowed' }} onClick={(e) => e.preventDefault()}>
                 <div className="action-icon">👮</div>
                 <h3>Manage Wardens</h3>
-                <p>Assign wardens to specific hostel blocks</p>
-                <div className="action-arrow">→</div>
+                <p>Coming soon - Assign wardens to blocks</p>
+                <div className="action-arrow">🔒</div>
               </div>
 
-              <div className="action-card" onClick={() => navigate('/admin/rooms')}>
+              <div className="action-card" style={{ opacity: 0.5, cursor: 'not-allowed' }} onClick={(e) => e.preventDefault()}>
                 <div className="action-icon">🏨</div>
                 <h3>Manage Rooms</h3>
-                <p>Allocate rooms and track availability</p>
-                <div className="action-arrow">→</div>
-              </div>
-
-              <div className="action-card secondary" onClick={() => navigate('/admin/settings')}>
-                <div className="action-icon">⚙️</div>
-                <h3>System Settings</h3>
-                <p>Global configurations and logs</p>
-                <div className="action-arrow">→</div>
+                <p>Coming soon - Allocate rooms and track availability</p>
+                <div className="action-arrow">🔒</div>
               </div>
             </div>
           </div>
@@ -114,17 +151,25 @@ const AdminDashboard = () => {
             <div className="activity-card">
               <h2 className="section-title">Recent Activity</h2>
               <div className="activity-list">
-                {activityLog.map((log) => (
-                  <div key={log.id} className={`activity-item ${log.type}`}>
-                    <div className="activity-dot"></div>
-                    <div className="activity-details">
-                      <p className="activity-text">{log.text}</p>
-                      <span className="activity-time">{log.time}</span>
+                {activities.length > 0 ? (
+                  activities.map((activity) => (
+                    <div key={activity.id} className="activity-item">
+                      <div className="activity-dot"></div>
+                      <div className="activity-content">
+                        <p>{activity.text}</p>
+                        <span className="activity-time">{activity.time}</span>
+                      </div>
                     </div>
+                  ))
+                ) : (
+                  <div style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>
+                    No recent activity
                   </div>
-                ))}
+                )}
               </div>
-              <button className="view-all-btn">View All History</button>
+              {activities.length > 0 && (
+                <button className="view-all-btn">View All Activity</button>
+              )}
             </div>
           </div>
         </div>

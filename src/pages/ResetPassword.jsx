@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import BackButton from '../components/BackButton';
 import './Auth.css';
 
 const ResetPassword = () => {
@@ -56,6 +57,7 @@ const ResetPassword = () => {
       <Header />
       <div className="auth-container">
         <div className="auth-card">
+          <BackButton to="/login" label="Back to Login" />
           <h1 className="auth-title">Reset Password</h1>
           <p className="auth-subtitle">Create a new password</p>
 

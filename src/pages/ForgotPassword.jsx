@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
+import BackButton from '../components/BackButton';
 import './Auth.css';
 
 const ForgotPassword = () => {
@@ -41,6 +42,7 @@ const ForgotPassword = () => {
       <Header />
       <div className="auth-container">
         <div className="auth-card">
+          <BackButton to="/login" label="Back to Login" />
           <h1 className="auth-title">Forgot Password</h1>
           <p className="auth-subtitle">Enter your email to reset password</p>
 
